@@ -1,0 +1,12 @@
+.row img {
+  width: 40px;
+  &:hover {
+    cursor: pointer;
+  }
+}
+.dropdown-menu[data-bs-popper] {
+  left: auto !important;
+  top: 105%;
+  right: 2px;
+  border: solid 1px var(--main-color);
+}

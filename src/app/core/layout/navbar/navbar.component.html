@@ -1,0 +1,25 @@
+<nav class="navbar navbar-expand-sm bg-body-tertiary mb-3">
+  <div class="container-fluid">
+    <a class="navbar-brand text-main" routerLink="/timeline">Facebook Posts</a>
+
+    <div class="justify-content-sm-end">
+      <div class="row">
+        <div class="col">
+          <div ngbDropdown class="d-inline-block">
+            <img
+              src="./images/profile.png"
+              class=""
+              id="dropdownBasic1"
+              ngbDropdownToggle
+            />
+            <div class="py-1" ngbDropdownMenu aria-labelledby="dropdownBasic1">
+              <a routerLink="/setting" ngbDropdownItem>Setting</a>
+              <hr class="m-0" />
+              <button routerLink="/signin" ngbDropdownItem>Log Out</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
