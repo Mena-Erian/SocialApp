@@ -1,3 +1,41 @@
 <section class="vh-100 d-flex justify-content-center align-items-center">
-  <h3 class="text-main-color">Sign In</h3>
+  <div
+    class="d-flex justify-content-center flex-wrap flex-column align-items-center w-75 mx-auto"
+  >
+    <h3 class="text-main-color text-uppercase mb-5 text-main fw-bold">
+      facebook clone
+    </h3>
+    <form class="w-100" [formGroup]="signInForm" (ngSubmit)="submitLoginForm()">
+      <input
+        formControlName="email"
+        class="form-control shadow-none mb-3 rounded-3"
+        placeholder="Email address"
+        type="text"
+      />
+      <input
+        formControlName="password"
+        class="form-control shadow-none mb-3 rounded-3"
+        placeholder="Password"
+        type="password"
+      />
+      <button class="btn btn-primary w-100 rounded-pill" type="submit">
+        Log in
+      </button>
+    </form>
+    <span
+      class="text-capitalize pointer text-body-secondary d-inline-block mt-4 fw-medium text-center mx-auto w-100"
+    >
+      forget password?
+    </span>
+    <button
+      class="create-account btn btn-outline-primary rounded-pill w-100 mx-auto"
+    >
+      Create new account
+    </button>
+    <span
+      class="text-capitalize text-body-secondary d-inline-block mt-3 fw-medium text-center mx-auto w-100"
+    >
+      meta
+    </span>
+  </div>
 </section>
