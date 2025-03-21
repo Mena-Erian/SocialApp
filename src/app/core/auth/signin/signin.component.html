@@ -6,18 +6,29 @@
       facebook clone
     </h3>
     <form class="w-100" [formGroup]="signInForm" (ngSubmit)="submitLoginForm()">
+      @let emailControl=signInForm.get('email');
       <input
         formControlName="email"
-        class="form-control shadow-none mb-3 rounded-3"
+        class="form-control shadow-none mb-3 rounded-3 not-valid"
         placeholder="Email address"
         type="text"
       />
+      @if (emailControl?.touched &&emailControl?.getError('required')) {
+      <div class="alert alert-danger" role="alert">your email is required</div>
+      }@else if (emailControl?.getError('email')) {
+      <div class="alert alert-danger" role="alert">your email is not valid</div>
+      } @let passControl=signInForm?.get('password');
       <input
         formControlName="password"
         class="form-control shadow-none mb-3 rounded-3"
         placeholder="Password"
         type="password"
       />
+      @if (passControl?.touched&& passControl?.getError('required')) {
+      <div class="alert alert-danger" role="alert">
+        your Password is required
+      </div>
+      }
       <button class="btn btn-primary w-100 rounded-pill" type="submit">
         Log in
       </button>
@@ -28,6 +39,7 @@
       forget password?
     </span>
     <button
+      routerLink="/signup"
       class="create-account btn btn-outline-primary rounded-pill w-100 mx-auto"
     >
       Create new account

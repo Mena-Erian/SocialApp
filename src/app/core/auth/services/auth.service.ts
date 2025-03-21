@@ -8,9 +8,12 @@ import { environment } from '../../../../environments/environment.development';
 })
 export class AuthService {
   private readonly httpClient = inject(HttpClient);
-
+  userData: any;
   constructor() {}
   signIn(form: object): Observable<any> {
     return this.httpClient.post(environment.baseUrl + '/users/signin', form);
   }
+  // decodeUserData(){
+
+  // }
 }

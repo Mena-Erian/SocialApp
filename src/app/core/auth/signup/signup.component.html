@@ -1,1 +1,38 @@
-<p>signup works!</p>
+<section class="vh-100 d-flex justify-content-center align-items-center">
+  <div
+    class="d-flex justify-content-center flex-wrap flex-column align-items-center w-75 mx-auto"
+  >
+    <h3 class="text-main-color text-uppercase mb-5 text-main fw-bold">
+      facebook clone
+    </h3>
+    <h4 class="text-center text-capitalize fw-bold">create a new account</h4>
+    <p class="fw-light">it's quick and easy.</p>
+    <hr />
+    <form class="w-100">
+      <div class="d-flex justify-content-center align-items-center gap-3">
+        <input
+          class="form-control shadow-none mb-3 rounded-3"
+          placeholder="First name"
+          type="text"
+        />
+        <input
+          class="form-control shadow-none mb-3 rounded-3"
+          placeholder="Surname"
+          type="text"
+        />
+      </div>
+      <div class="d-flex justify-content-between align-items-center">
+        <!-- <input class="form-control" type="date" /> -->
+      </div>
+      <button class="btn btn-primary w-100 rounded-pill" type="submit">
+        Sign Up
+      </button>
+    </form>
+    <span
+      routerLink="/signin"
+      class="pointer text-primary d-inline-block mt-4 text-center mx-auto w-100"
+    >
+      Already have an account?
+    </span>
+  </div>
+</section>

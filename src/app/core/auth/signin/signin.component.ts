@@ -7,16 +7,18 @@ import {
 } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { error } from 'console';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-signin',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './signin.component.html',
   styleUrl: './signin.component.scss',
 })
 export class SigninComponent implements OnInit {
   private readonly formBuilder = inject(FormBuilder);
   private readonly authService = inject(AuthService);
+  private readonly router = inject(Router);
   signInForm!: FormGroup;
   ngOnInit(): void {
     this.initForm();
@@ -33,13 +35,17 @@ export class SigninComponent implements OnInit {
       this.authService.signIn(this.signInForm.value).subscribe({
         next: (res) => {
           console.log(res);
+          if (res.message === 'success') {
+            this.router.navigate(['/timeline']);
+            localStorage.setItem('socialToken', res.token);
+          }
         },
         error: (err) => {
           console.error(err);
         },
       });
     } else {
-      console.log(this.signInForm.errors);
+      console.log(this.signInForm.markAllAsTouched());
     }
   }
 }
