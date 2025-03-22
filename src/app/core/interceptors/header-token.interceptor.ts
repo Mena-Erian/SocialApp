@@ -13,7 +13,6 @@ export const headerTokenInterceptor: HttpInterceptorFn = (req, next) => {
         token: localStorage.getItem('socialToken') || '',
       },
     });
-    return next(req);
   }
   return next(req);
 };

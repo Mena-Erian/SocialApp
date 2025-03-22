@@ -3,7 +3,7 @@ import { PostsService } from './../../service/posts.service';
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { PostComponent } from '../post/post.component';
 import { JsonPipe } from '@angular/common';
-import { IPost } from '../../model/interfaces/postes.interface';
+import { IPost } from '../../model/postes.interface';
 
 @Component({
   selector: 'app-posts-list',

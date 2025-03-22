@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment.development';
-import { IAllPosts } from '../model/interfaces/postes.interface';
+import { IAllPosts } from '../model/postes.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -12,9 +12,9 @@ export class PostsService {
 
   constructor() {}
   getAllPosts(): Observable<IAllPosts> {
-    return this.httpClient.get<IAllPosts>(environment.baseUrl + '/posts');
+    return this.httpClient.get<IAllPosts>(`${environment.baseUrl}/posts`);
   }
-  createPost(): Observable<any> {
-    return this.httpClient.post(``, ``);
+  createPost(body: FormData): Observable<any> {
+    return this.httpClient.post<any>(`${environment.baseUrl}/posts`, body);
   }
 }
