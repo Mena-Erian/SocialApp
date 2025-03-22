@@ -38,6 +38,7 @@ export class SigninComponent implements OnInit {
           if (res.message === 'success') {
             this.router.navigate(['/timeline']);
             localStorage.setItem('socialToken', res.token);
+            // console.log('your token', localStorage.getItem('socialToken'));
           }
         },
         error: (err) => {

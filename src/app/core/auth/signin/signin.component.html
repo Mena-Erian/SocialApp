@@ -17,7 +17,7 @@
       <div class="alert alert-danger" role="alert">your email is required</div>
       }@else if (emailControl?.getError('email')) {
       <div class="alert alert-danger" role="alert">your email is not valid</div>
-      } @let passControl=signInForm?.get('password');
+      } @let passControl=signInForm.get('password');
       <input
         formControlName="password"
         class="form-control shadow-none mb-3 rounded-3"
