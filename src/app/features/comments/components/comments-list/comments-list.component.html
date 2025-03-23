@@ -9,21 +9,23 @@
 
   <div class="add-comment position-sticky bottom-0 start-0 end-0">
     <form
-      (submit)="createComment(newComment, postId())"
+      (ngSubmit)="createComment(newComment, postId())"
       #newCmtForm="ngForm"
       class="d-flex justify-content-between py-1 gap-1"
     >
       <input
-        #newCmtInput
-        [ngModelOptions]="{ standalone: true }"
+        id="newComment"
+        #newCmtInput="ngModel"
         [(ngModel)]="newComment"
+        [ngModelOptions]="{ standalone: true }"
+        name="newComment"
         type="text"
         class="form-control"
         placeholder="write your comment..."
       />
       <button type="submit" class="btn btn-primary fs-4">
         @if (loading) {
-        <div class="spinner-border-sm text-light" role="status">
+        <div class="spinner-border text-light" role="status">
           <span class="visually-hidden">Loading...</span>
         </div>
         <!-- <svg

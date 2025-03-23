@@ -23,49 +23,34 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './comments-list.component.html',
   styleUrl: './comments-list.component.scss',
 })
-export class CommentsListComponent implements AfterViewInit, OnDestroy {
+export class CommentsListComponent {
   show = input.required<boolean>();
   commentsPost = input.required<IComment[]>();
   postId = input.required<string>();
   private readonly commentsService = inject(CommentsService);
-  private formSubmitListener!: () => void;
   loading: boolean = false;
   lastComment = computed(
     () => this.commentsPost()[this.commentsPost().length - 1]
   );
-  newComment!: string;
-  constructor(private renderer2: Renderer2) {}
-  @ViewChild('newCmtForm') newCmtForm!: ElementRef<HTMLFormElement>;
-  @ViewChild('newCmtInput') newCmtInput!: ElementRef<HTMLInputElement>;
-  ngAfterViewInit(): void {
-    this.submitEventInit();
-  }
-  submitEventInit() {
-    this.formSubmitListener = this.renderer2.listen(
-      this.newCmtForm.nativeElement,
-      'submit',
-      (e: SubmitEvent) => {
-        // console.log('test', e);
-        e.preventDefault();
-      }
-    );
-  }
-
+  newComment: string = '';
+  commentRegExp: RegExp = /^.{3,}$/;
   createComment(contentCmt: string, postId: string): void {
-    this.loading = true;
-    this.newCmtInput.nativeElement.value = '';
-
-    this.commentsService.createCmt(contentCmt, postId).subscribe({
-      next: (res) => {
-        this.loading = false;
-        console.log(res);
-      },
-      error: (err) => {
-        console.error(err);
-      },
-    });
-  }
-  ngOnDestroy(): void {
-    this.formSubmitListener();
+    if (this.commentRegExp.test(contentCmt)) {
+      console.log('your comment:', contentCmt);
+      this.loading = true;
+      this.commentsService.createCmt(contentCmt, postId).subscribe({
+        next: (res) => {
+          this.loading = false;
+          this.newComment = '';
+          console.log(res);
+        },
+        error: (err) => {
+          this.loading = false;
+          console.error(err);
+        },
+      });
+    } else {
+      console.log('you have err in you comment');
+    }
   }
 }
