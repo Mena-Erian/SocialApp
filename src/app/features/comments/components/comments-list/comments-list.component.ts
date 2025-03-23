@@ -1,4 +1,11 @@
-import { Component, input } from '@angular/core';
+import {
+  Component,
+  computed,
+  input,
+  OnInit,
+  signal,
+  WritableSignal,
+} from '@angular/core';
 import { IComment } from '../../../posts/model/postes.interface';
 import { CommentComponent } from '../comment/comment.component';
 
@@ -10,4 +17,11 @@ import { CommentComponent } from '../comment/comment.component';
 })
 export class CommentsListComponent {
   commentsPost = input.required<IComment[]>();
+  // lastComment: WritableSignal<IComment> = signal(
+  //   this.commentsPost()[this.commentsPost().length - 1]
+  // );
+  lastComment = computed(
+    () => this.commentsPost()[this.commentsPost().length - 1]
+  );
+  show = input.required<boolean>();
 }

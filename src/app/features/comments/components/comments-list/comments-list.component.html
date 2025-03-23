@@ -1,9 +1,13 @@
 <div
-  class="post-commends bg-body-secondary rounded-2 p-2 d-flex flex-column gap-1 rounded-1"
+  class="post-commends position-relative bg-body-secondary rounded-2 p-2 d-flex flex-column gap-1 rounded-1"
 >
-  <app-comment />
+  @if (show() ) { @for (comment of commentsPost(); track $index) {
+  <app-comment [cmt]="comment" />
+  } }@else {
+  <app-comment [cmt]="lastComment()" />
+  }
 
-  <div class="add-comment">
+  <div class="add-comment position-sticky bottom-0 start-0 end-0">
     <form class="d-flex justify-content-between py-1 gap-1">
       <input
         type="text"

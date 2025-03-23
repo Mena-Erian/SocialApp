@@ -1,4 +1,4 @@
-<div class="card p-3">
+<div class="card mt-4 p-3">
   <div class="header">
     <div class="sec-1 d-flex justify-content-between align-items-center">
       <div class="d-flex align-items-center justify-content-between gap-2">
@@ -31,7 +31,15 @@
       </p>
     </div>
     <img class="w-100 rounded-2" [src]="post().image" alt="post photo" />
-    <a class="text-primary text-decoration-none">show comments</a>
+    <a
+      class="text-primary text-decoration-none pointer"
+      (click)="showComments()"
+    >
+      @if(isShowcomments()){ hide }@else { show } comments
+    </a>
   </div>
-  <app-comments-list [commentsPost]="post().comments" />
+  <app-comments-list
+    [show]="isShowcomments()"
+    [commentsPost]="post().comments"
+  />
 </div>

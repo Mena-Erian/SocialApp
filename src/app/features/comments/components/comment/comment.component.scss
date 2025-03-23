@@ -1,0 +1,42 @@
+img[alt="profile"] {
+  width: 40px;
+}
+img:hover {
+  cursor: pointer;
+}
+// .body {
+//   max-height: 50vh;
+// }
+// .body img {
+//   height: 100%;
+//   object-fit: contain;
+// }
+svg {
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.body {
+  a {
+    font-size: medium;
+    display: inline-block;
+    margin-bottom: 1rem;
+    margin-top: 5px;
+  }
+}
+.post-commends {
+  max-height: 15em;
+  overflow: auto;
+  transition: all 0.35s;
+  -webkit-transition: all 0.35s;
+  > div.commend {
+    background-color: rgba(185, 183, 183, 0.753);
+    p {
+      margin-bottom: 0;
+    }
+  }
+}
+.add-comment {
+  svg:hover {
+    fill: whitesmoke;
+  }
+}

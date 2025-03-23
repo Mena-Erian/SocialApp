@@ -4,13 +4,10 @@ img[alt="profile"] {
 img:hover {
   cursor: pointer;
 }
-// .body {
-//   max-height: 50vh;
-// }
-// .body img {
-//   height: 100%;
-//   object-fit: contain;
-// }
+.card {
+  border: none;
+  box-shadow: 0 0 16px -7px var(--main-color);
+}
 svg {
   cursor: pointer;
   transition: all 0.2s;
@@ -19,8 +16,8 @@ svg {
   a {
     font-size: medium;
     display: inline-block;
-    margin-bottom: 1rem;
-    margin-top: 5px;
+    margin-bottom: 0.75rem;
+    margin-top: 1rem;
   }
 }
 .post-commends {

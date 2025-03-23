@@ -24,6 +24,10 @@ svg {
   }
 }
 .post-commends {
+  max-height: 15em;
+  overflow: auto;
+  transition: all 0.35s;
+  -webkit-transition: all 0.35s;
   > div.commend {
     background-color: rgba(185, 183, 183, 0.753);
     p {

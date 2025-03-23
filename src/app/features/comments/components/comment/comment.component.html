@@ -1,13 +1,15 @@
 <div class="commend bg-body-tertiary p-3 mt-2 rounded-3">
-  <div class="d-flex justify-content-between align-items-center">
+  <div class="d-flex align-items-center justify-content-between gap-1">
     <div class="d-flex align-items-center justify-content-between gap-1">
       <img src="./images/profile.png" alt="profile" />
-      <div class="">
-        <p class="my-0 fs-6 text-capitalize">
-          mena erian
-          <span class="fs-6 ms-1 fw-light">2 hours ago</span>
-        </p>
-      </div>
+      <!-- <img [src]="cmt().commentCreator.photo" alt="profile" /> problem in backend -->
+
+      <p class="my-0 fs-6 text-capitalize text-center">
+        {{ cmt().commentCreator.name }}
+        <span class="fs-6 ms-1 fw-light accordion text-nowrap">{{
+          cmt().createdAt | date
+        }}</span>
+      </p>
     </div>
     <div>
       <svg
@@ -24,7 +26,7 @@
       </svg>
     </div>
   </div>
-  <p class="mt-1">
-    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eum, possimus.
+  <p class="mt-2 mb-1">
+    {{ cmt().content }}
   </p>
 </div>
