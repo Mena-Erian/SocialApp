@@ -10,11 +10,11 @@ export interface IPost {
   image: string;
   user: User;
   createdAt: string;
-  comments: Comment[];
+  comments: IComment[];
   id: string;
 }
 
-export interface Comment {
+export interface IComment {
   _id: string;
   content?: string;
   commentCreator: User;
