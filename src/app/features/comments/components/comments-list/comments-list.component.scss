@@ -40,3 +40,7 @@ svg {
     fill: whitesmoke;
   }
 }
+.not-valid-cmt:focus {
+  border-color: rgb(254, 134, 160);
+  box-shadow: 0 0 0 0.25rem rgba(253, 13, 13, 0.25);
+}

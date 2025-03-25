@@ -1,12 +1,13 @@
 <div
+  #cmtContainer
   class="post-commends position-relative bg-body-secondary rounded-2 p-2 d-flex flex-column gap-1 rounded-1"
 >
-  @if (show() ) { @for (comment of commentsPost(); track $index) {
+  @if (showAllCmt() ) { @for (comment of commentsList(); track $index) {
+  {{ scrollToBottom() }}
   <app-comment [cmt]="comment" />
   } }@else {
   <app-comment [cmt]="lastComment()" />
   }
-
   <div class="add-comment position-sticky bottom-0 start-0 end-0">
     <form
       (ngSubmit)="createComment(newComment, postId())"
@@ -21,9 +22,17 @@
         name="newComment"
         type="text"
         class="form-control"
+        [ngClass]="{
+          'not-valid-cmt':!isNewCmtVaild(newComment) && !newComment.trim(),
+        }"
+        #newCmtInputEl
         placeholder="write your comment..."
       />
-      <button type="submit" class="btn btn-primary fs-4">
+      <button
+        type="submit"
+        (click)="focusOnInput()"
+        class="btn btn-primary fs-4"
+      >
         @if (loading) {
         <div class="spinner-border text-light" role="status">
           <span class="visually-hidden">Loading...</span>
