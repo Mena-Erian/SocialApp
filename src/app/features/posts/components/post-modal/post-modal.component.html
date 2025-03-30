@@ -1,0 +1,66 @@
+<section>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-title">Profile deletion</h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-describedby="modal-title"
+      (click)="modal.dismiss('Cross click')"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <textarea
+        rows="2"
+        placeholder="write your thoughts here..."
+        class="form-control mb-3 bg-body-tertiary"
+        name="postContant"
+        id="postContantTextarea"
+        #postContantTextarea
+      >
+      </textarea>
+      <p class="mt-2 mb-1 fw-bold">Upload Photos</p>
+      <label
+        (drag)="startDargImg($event)"
+        class="photo-input-label bg-body-tertiary"
+        for="uploudePhoto"
+      >
+        <img class="d-block" src="./images/profile.png" alt="uploader cloud" />
+        <p class="mb-1 mt-2">
+          <span
+            class="upload-link position-relative text-primary link-primary link-offset-2 link-offset-3-hover fw-medium"
+            >click to upload
+            <input
+              class="p-0 w-50 opacity-0 position-absolute top-0 bottom-0 start-0 end-0"
+              type="file"
+              accept="image/*"
+              name="uploudePhoto"
+              id="uploudePhotoInput"
+            />
+          </span>
+
+          or drag and drop
+        </p>
+        <p class="fw-light text-body-secondary text-capitalize">
+          max. file size 25MB
+        </p>
+      </label>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-outline-secondary"
+      (click)="modal.dismiss('cancel click')"
+    >
+      info Close
+    </button>
+    <button
+      type="button"
+      class="btn btn-primary"
+      (click)="modal.close('Ok click')"
+    >
+      Post
+    </button>
+  </div>
+</section>
