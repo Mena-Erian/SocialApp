@@ -14,7 +14,11 @@ import {
 import { PostComponent } from '../post/post.component';
 import { JsonPipe } from '@angular/common';
 import { IPost } from '../../model/postes.interface';
-import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {
+  NgbActiveModal,
+  NgbModal,
+  NgbModalRef,
+} from '@ng-bootstrap/ng-bootstrap';
 import { PostModalComponent } from '../post-modal/post-modal.component';
 
 // @Component({
@@ -131,6 +135,7 @@ export class PostsListComponent implements OnInit, OnDestroy, AfterViewInit {
   private readonly postsService = inject(PostsService);
   private readonly platformCheckService = inject(PlatformCheckService);
   private readonly renderer2 = inject(Renderer2);
+  // private readonly ngbModalRef = inject(NgbModalRef);
   @ViewChild('newpostInput') newpostInput!: ElementRef<HTMLInputElement>;
   posts: IPost[] = [];
   res: any;
@@ -153,13 +158,24 @@ export class PostsListComponent implements OnInit, OnDestroy, AfterViewInit {
       });
     }
   }
+  test() {}
   openModal() {
     this.renderer2.setProperty(this.newpostInput.nativeElement, 'value', '');
-    // this.newpostInput.nativeElement.value = '';
-    this.modalService.open(PostModalComponent, {
-      centered: true,
-      backdrop: false,
-    });
+    this.modalService
+      .open(PostModalComponent, {
+        centered: true,
+        backdrop: false,
+      })
+      .result.then(
+        (value) => {
+          console.log('cancle', value);
+        },
+        (reason) => {
+          console.log('dismiss', reason);
+          this.posts.unshift(reason);
+        }
+      );
+    // console.log(this.ngbModalRef.result);
   }
   ngOnDestroy(): void {}
 }

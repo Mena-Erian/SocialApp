@@ -1,22 +1,54 @@
 .photo-input-label {
+  transition: all 0.35s;
   border-radius: 20px;
   border: 1px solid rgb(211, 211, 211);
   width: 100%;
-  height: 35vh;
+  min-height: 35vh;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
 }
 .photo-input-label img {
-  width: 100px;
+  width: 100%;
 }
 .upload-link {
   text-decoration: underline;
   font-size: 1.17rem;
+  &:hover {
+    cursor: pointer;
+  }
 }
 #uploudePhotoInput {
+  opacity: 1;
+  &:hover {
+    cursor: pointer;
+  }
 }
-:root {
-  --url: "../../../../../../public/images/profile.png";
+.startDrag {
+  background-color: #ceeaf382 !important;
+  border: 2px dashed #7575eade;
+  opacity: 0.95;
+  animation-name: border-dash;
+  animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+  animation-duration: 1s;
+  animation-direction: alternate;
+  animation-iteration-count: infinite;
+  position: relative;
+}
+@keyframes border-dash {
+  from {
+    // stroke-dashoffset: 0;
+    // border-image: linear-gradient(0deg, blue 25%);
+    border-width: 2.5px;
+    // transform: rotate(0deg);
+    opacity: 0.5;
+  }
+  to {
+    // border-image: linear-gradient(360deg, blue 25%);
+    // stroke-dashoffset: 100;
+    opacity: 1;
+    border-width: 2px;
+    // transform: rotate(360deg);
+  }
 }

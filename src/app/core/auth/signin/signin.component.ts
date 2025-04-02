@@ -39,6 +39,14 @@ export class SigninComponent implements OnInit {
             this.router.navigate(['/timeline']);
             localStorage.setItem('socialToken', res.token);
             // console.log('your token', localStorage.getItem('socialToken'));
+            this.authService.getUserData().subscribe({
+              next: (res) => {
+                console.log(res);
+                if (res.message === 'success') {
+                  this.authService.userData = res.user;
+                }
+              },
+            });
           }
         },
         error: (err) => {

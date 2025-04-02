@@ -13,7 +13,7 @@ export class AuthService {
   signIn(form: object): Observable<any> {
     return this.httpClient.post(environment.baseUrl + '/users/signin', form);
   }
-  // decodeUserData(){
-
-  // }
+  getUserData(): Observable<any> {
+    return this.httpClient.get(`${environment.baseUrl}/users/profile-data`);
+  }
 }
