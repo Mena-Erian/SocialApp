@@ -56,17 +56,25 @@ export class PostModalComponent implements AfterViewInit, OnInit {
       console.log(this.imgUrl);
     }
   }
-
+  dropImg(e: DragEvent): void {
+    e.preventDefault();
+    this.photoDragOver = false;
+    const dataTransferFiles = e.dataTransfer?.files;
+    if (dataTransferFiles && dataTransferFiles?.length > 0) {
+      this.savedFile = dataTransferFiles[0];
+      this.postForm.patchValue({ image: this.savedFile });
+      this.imgUrl = URL.createObjectURL(this.savedFile);
+      console.log(this.imgUrl);
+    } else {
+      console.error('drag again');
+    }
+  }
   startDargImg(eventInfo: DragEvent): void {
     eventInfo.preventDefault();
     this.photoDragOver = true;
     this.renderer2.addClass(this.photoLabelElment.nativeElement, 'startDrag');
   }
-  dropImg(e: DragEvent): void {
-    e.preventDefault();
-    this.photoDragOver = false;
-    console.log(e.dataTransfer?.files);
-  }
+
   dismissModal(): void {
     this.modal.dismiss('ok close');
   }
