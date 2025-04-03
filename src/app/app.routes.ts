@@ -25,7 +25,7 @@ export const routes: Routes = [
     children: [
       { path: 'timeline', component: TimelineComponent, title: 'Time Line' },
       {
-        path: 'userProfile',
+        path: 'userProfile/:userId',
         component: UserProfileComponent,
         title: 'Profile',
         children: [

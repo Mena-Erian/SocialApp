@@ -2,7 +2,7 @@
   <div class="header">
     <div class="sec-1 d-flex justify-content-between align-items-center">
       <div
-        routerLink="/userProfile"
+        [routerLink]="'/userProfile/' + post().user._id"
         class="d-flex align-items-center justify-content-between gap-2"
       >
         <img [src]="post().user.photo" alt="profile" />

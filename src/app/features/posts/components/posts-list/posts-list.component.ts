@@ -12,7 +12,6 @@ import {
   ViewChild,
 } from '@angular/core';
 import { PostComponent } from '../post/post.component';
-import { JsonPipe } from '@angular/common';
 import { IPost } from '../../model/postes.interface';
 import {
   NgbActiveModal,
