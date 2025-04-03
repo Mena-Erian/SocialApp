@@ -8,9 +8,10 @@ import {
 import { IPost } from '../../model/postes.interface';
 import { DatePipe } from '@angular/common';
 import { CommentsListComponent } from '../../../comments/components/comments-list/comments-list.component';
+import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-post',
-  imports: [DatePipe, CommentsListComponent],
+  imports: [DatePipe, CommentsListComponent, RouterLink],
   templateUrl: './post.component.html',
   styleUrl: './post.component.scss',
   encapsulation: ViewEncapsulation.Emulated,

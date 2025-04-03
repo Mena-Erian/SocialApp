@@ -1,0 +1,56 @@
+<main class="profile pt-2">
+  <div class="profile-sections">
+    <section class="header rounded-bottom-3">
+      <div class="back-img position-relative">
+        <img src="./images/profile.png" class="main-img" />
+      </div>
+      <div class="user-data text-center pt-5 mt-5">
+        <h1 class="text-capitalize fw-bold">Mena Erian Farouk</h1>
+        <p class="fw-light">
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Recusandae,
+          fugit.
+        </p>
+        <p class="fw-light">Designer + God fearing</p>
+      </div>
+      <div
+        class="d-flex buttons-group align-items-center justify-content-between gap-2 mt-lg-2 mx-auto"
+      >
+        <button class="btn btn-primary fw-bold flex-grow-1 py-2">
+          + @if (isMyProfile) { Add to story }@else { Add Friend}
+        </button>
+        <button class="btn btn-secondary fw-bold flex-grow-1 py-2">
+          @if (isMyProfile) {Edit prfile}@else {Follow}
+        </button>
+        <button role="more" class="btn btn-secondary py-2">...</button>
+      </div>
+    </section>
+    <section class="sec-2 mt-2 p-3 rounded-3">
+      <div class="nav border-bottom pb-2 border-secondary">
+        <button
+          routerLinkActive="btn-primary text-white"
+          routerLink="posts"
+          class="btn btn-outline-primary text-white px-3 rounded-pill fw-bold"
+        >
+          Posts
+        </button>
+        <button
+          routerLinkActive="btn-primary text-white"
+          routerLink="reels"
+          class="btn px-3 btn-outline-primary rounded-pill fw-bold ms-2"
+        >
+          Reels
+        </button>
+      </div>
+      <div class="my-3">
+        <h3 class="fw-bold">Details</h3>
+        <p>Lorem ipsum dolor sit amet.</p>
+        <p>Lorem ipsum dolor sit amet.</p>
+        <p>Lorem ipsum dolor sit amet.</p>
+        <p>Lorem ipsum dolor sit amet.</p>
+      </div>
+    </section>
+    <section class="sec-2 mt-2 p-3 rounded-3">
+      <router-outlet></router-outlet>
+    </section>
+  </div>
+</main>

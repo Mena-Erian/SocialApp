@@ -1,7 +1,10 @@
 <div class="card mt-4 p-3">
   <div class="header">
     <div class="sec-1 d-flex justify-content-between align-items-center">
-      <div class="d-flex align-items-center justify-content-between gap-2">
+      <div
+        routerLink="/userProfile"
+        class="d-flex align-items-center justify-content-between gap-2"
+      >
         <img [src]="post().user.photo" alt="profile" />
         <div class="w-75">
           <p class="my-0 fs-6 text-capitalize">{{ post().user.name }}</p>
