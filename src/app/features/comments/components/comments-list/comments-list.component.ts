@@ -62,15 +62,13 @@ export class CommentsListComponent {
           this.newComment = '';
           console.log(res);
           this.commentsList.set(res.comments.reverse());
-          console.log(this.commentsList());
           this.toastrService.success(res.message);
-        },
-        error: (err) => {
-          this.loading = false;
-          console.error(err);
         },
       });
     } else {
+      this.toastrService.warning(
+        'you just write one character Or \n you have err in you comment'
+      );
       console.log('you have err in you comment');
     }
   }

@@ -12,6 +12,7 @@ import {
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Blob } from 'buffer';
+import { ToastrService } from 'ngx-toastr';
 import { resolve } from 'path';
 // import { URL } from 'url';
 
@@ -26,6 +27,7 @@ export class PostModalComponent implements AfterViewInit, OnInit {
   private readonly renderer2 = inject(Renderer2);
   private readonly postsService = inject(PostsService);
   private readonly authService = inject(AuthService);
+  private readonly toastrService = inject(ToastrService);
   @ViewChild('postContantTextarea')
   postContantTextarea!: ElementRef<HTMLTextAreaElement>;
   @ViewChild('photoLabel', { static: false })
@@ -107,6 +109,7 @@ export class PostModalComponent implements AfterViewInit, OnInit {
                     next: (res) => {
                       console.log(res);
                       this.modal.dismiss(res.posts[res.posts.length - 1]);
+                      this.toastrService.success(res.message);
                     },
                     error(err) {
                       console.error(err.error);

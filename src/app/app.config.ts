@@ -20,6 +20,12 @@ import { LoadingInterceptor } from './core/interceptors/loading.interceptor';
 import { ErrorInterceptor } from './core/interceptors/errors.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+// import { QIsBrowser } from './shared/services/platform-check.service';
+
+export function QIsBrowser() {
+  return typeof window !== 'undefined';
+}
+
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
@@ -36,7 +42,9 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom([
       NgxSpinnerModule,
       BrowserAnimationsModule,
-      ToastrModule.forRoot(),
+      ToastrModule.forRoot({
+        closeButton: true,
+      }),
     ]),
   ],
 };
