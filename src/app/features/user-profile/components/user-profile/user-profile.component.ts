@@ -1,6 +1,7 @@
+import { PostsService } from './../../../posts/service/posts.service';
 import { PlatformCheckService } from './../../../../shared/services/platform-check.service';
 import { AuthService } from './../../../../core/auth/services/auth.service';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, computed, inject, OnInit } from '@angular/core';
 import {
   ActivatedRoute,
   RouterLink,
@@ -8,6 +9,7 @@ import {
   RouterOutlet,
 } from '@angular/router';
 import { IUser } from '../../../../core/model/user-data.interface';
+import { User } from '../../../posts/model/postes.interface';
 @Component({
   selector: 'app-user-profile',
   imports: [RouterOutlet, RouterLink, RouterLinkActive],
@@ -16,12 +18,12 @@ import { IUser } from '../../../../core/model/user-data.interface';
 })
 export class UserProfileComponent implements OnInit {
   private readonly AuthService = inject(AuthService);
-  private readonly activatedRoute = inject(ActivatedRoute);
-
+  private readonly postsService = inject(PostsService);
   private readonly platformCheckService = inject(PlatformCheckService);
   isMyProfile: boolean = false;
   myUserData: IUser = {} as IUser;
   userId: string = '';
+  userData = computed(() => this.postsService.userDataUserPorfile());
   ngOnInit(): void {
     if (this.isMyProfile) {
       if (this.platformCheckService.isBrowser()) {
@@ -33,10 +35,5 @@ export class UserProfileComponent implements OnInit {
         });
       }
     }
-    // this.activatedRoute.paramMap.subscribe({
-    //   next: (res) => {
-    //     console.log(res);
-    //   },
-    // });
   }
 }

@@ -2,11 +2,11 @@
   <div class="profile-sections">
     <section class="header rounded-bottom-3">
       <div class="back-img position-relative">
-        <img src="./images/profile.png" class="main-img" />
+        <img [src]="userData().photo" class="main-img" />
       </div>
       <div class="user-data text-center pt-5 mt-5">
         <h1 class="text-capitalize fw-bold">
-          {{ myUserData.name || "Mena Erian Farouk" }}
+          {{ userData().name || "" }}
         </h1>
         <p class="fw-light">
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Recusandae,
@@ -65,6 +65,9 @@
           </span>
         </p>
         }@else {
+        <p class="alert alert-secondary fw-light fs-6 opacity-75 h6">
+          Default data temporarily until the backend fixes the issue
+        </p>
         <p class="fw-bold">
           Email :
           <span class="fw-normal"> mena3koko2karas1{{ "@" }}gmail.com </span>

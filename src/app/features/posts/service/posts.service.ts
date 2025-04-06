@@ -1,16 +1,16 @@
 import { PlatformCheckService } from './../../../shared/services/platform-check.service';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, signal, WritableSignal } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment.development';
-import { IAllPosts } from '../model/postes.interface';
+import { IAllPosts, User } from '../model/postes.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PostsService {
   private readonly httpClient = inject(HttpClient);
-
+  userDataUserPorfile: WritableSignal<User> = signal<User>({} as User);
   constructor() {}
   getAllPosts(): Observable<IAllPosts> {
     return this.httpClient.get<IAllPosts>(`${environment.baseUrl}/posts`);

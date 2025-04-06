@@ -80,7 +80,6 @@ export class CommentsListComponent {
     }
     return false;
   }
-  ngAfterViewInit(): void {}
   scrollToBottom(): void {
     const cmtContainer = this.cmtContainer.nativeElement;
     cmtContainer.scrollTop = cmtContainer.scrollHeight;

@@ -38,7 +38,7 @@
       class="text-primary text-decoration-none pointer"
       (click)="showComments()"
     >
-      @if(isShowcomments()){ hide }@else { show } comments
+      show @if(isShowcomments()){ less }@else { more } comments
     </a>
   </div>
   <app-comments-list

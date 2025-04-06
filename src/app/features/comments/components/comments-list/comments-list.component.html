@@ -2,12 +2,19 @@
   #cmtContainer
   class="post-commends position-relative bg-body-secondary rounded-2 p-2 d-flex flex-column gap-1 rounded-1"
 >
-  @if (showAllCmt() ) { @for (comment of commentsList(); track $index) {
+  @if (commentsList().length ) { @if (showAllCmt() ) { @for (comment of
+  commentsList(); track $index) {
   {{ scrollToBottom() }}
   <app-comment [cmt]="comment" />
   } }@else {
   <app-comment [cmt]="lastComment()" />
+  } }@else {
+  <p class="alert-danger alert">
+    *Problem in backend return the post with out comment
+  </p>
+  <p class="alert-danger alert">*Or the post not have comment</p>
   }
+
   <div class="add-comment position-sticky bottom-0 start-0 end-0">
     <form
       (ngSubmit)="createComment(newComment, postId())"

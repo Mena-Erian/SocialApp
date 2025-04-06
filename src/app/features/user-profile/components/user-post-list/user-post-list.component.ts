@@ -29,7 +29,9 @@ export class UserPostListComponent implements OnInit {
     if (this.platformCheckService.isBrowser()) {
       this.postsService.getUserPosts(this.userId).subscribe({
         next: (res) => {
-          console.log(res.posts);
+          console.log(res);
+          this.postsService.userDataUserPorfile.set(res.posts[0].user);
+          console.log(this.postsService.userDataUserPorfile());
           this.posts = res.posts;
         },
       });

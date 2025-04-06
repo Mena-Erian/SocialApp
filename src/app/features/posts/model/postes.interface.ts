@@ -22,7 +22,7 @@ export interface IComment {
   createdAt: string;
 }
 
-interface User {
+export interface User {
   _id: string;
   name: string;
   photo: string;
