@@ -8,6 +8,7 @@ import {
 import { AuthService } from '../services/auth.service';
 import { error } from 'console';
 import { Router, RouterLink } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-signin',
@@ -19,6 +20,7 @@ export class SigninComponent implements OnInit {
   private readonly formBuilder = inject(FormBuilder);
   private readonly authService = inject(AuthService);
   private readonly router = inject(Router);
+  private readonly toastrService = inject(ToastrService);
   signInForm!: FormGroup;
   ngOnInit(): void {
     this.initForm();
@@ -44,6 +46,7 @@ export class SigninComponent implements OnInit {
                 console.log(res);
                 if (res.message === 'success') {
                   this.authService.userData = res.user;
+                  this.toastrService.success(res.message);
                 }
               },
             });

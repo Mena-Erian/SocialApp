@@ -1,7 +1,6 @@
-import { inject, PLATFORM_ID } from '@angular/core';
+import { inject } from '@angular/core';
 import { PlatformCheckService } from './../../shared/services/platform-check.service';
 import { HttpInterceptorFn } from '@angular/common/http';
-import { isPlatformBrowser } from '@angular/common';
 
 export const headerTokenInterceptor: HttpInterceptorFn = (req, next) => {
   const platformCheckService: PlatformCheckService =

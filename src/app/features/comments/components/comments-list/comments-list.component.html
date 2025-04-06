@@ -8,12 +8,7 @@
   <app-comment [cmt]="comment" />
   } }@else {
   <app-comment [cmt]="lastComment()" />
-  } }@else {
-  <p class="alert-danger alert">
-    *Problem in backend return the post with out comment
-  </p>
-  <p class="alert-danger alert">*Or the post not have comment</p>
-  }
+  } }
 
   <div class="add-comment position-sticky bottom-0 start-0 end-0">
     <form

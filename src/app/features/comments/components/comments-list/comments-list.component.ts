@@ -19,6 +19,7 @@ import { CommentComponent } from '../comment/comment.component';
 import { FormsModule } from '@angular/forms';
 import { NgClass } from '@angular/common';
 import { IAddCmt } from '../../model/comments.interface';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-comments-list',
@@ -31,6 +32,7 @@ export class CommentsListComponent {
   commentsPost = input.required<IComment[]>();
   postId = input.required<string>();
   private readonly commentsService = inject(CommentsService);
+  private readonly toastrService = inject(ToastrService);
   loading: boolean = false;
   lastComment = computed(
     () => this.commentsList()[this.commentsList().length - 1] || []
@@ -61,6 +63,7 @@ export class CommentsListComponent {
           console.log(res);
           this.commentsList.set(res.comments.reverse());
           console.log(this.commentsList());
+          this.toastrService.success(res.message);
         },
         error: (err) => {
           this.loading = false;
