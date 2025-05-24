@@ -14,6 +14,9 @@ export class AuthService {
   signIn(form: object): Observable<any> {
     return this.httpClient.post(environment.baseUrl + '/users/signin', form);
   }
+  signUp(form: object): Observable<any> {
+    return this.httpClient.post(`${environment.baseUrl}/users/signup`, form);
+  }
   getUserData(): Observable<IUserDataRoot> {
     return this.httpClient.get<IUserDataRoot>(
       `${environment.baseUrl}/users/profile-data`

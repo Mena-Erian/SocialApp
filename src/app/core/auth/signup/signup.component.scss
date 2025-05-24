@@ -1,0 +1,23 @@
+.date > div {
+  width: 100%;
+}
+.form-label {
+  margin-bottom: 0.2rem;
+}
+@media (min-width: 576px) {
+  section > div {
+    width: 90% !important;
+  }
+}
+
+@media (min-width: 768px) {
+  section > div {
+    width: 75% !important;
+  }
+}
+
+@media (min-width: 992px) {
+  section > div {
+    width: 60% !important;
+  }
+}

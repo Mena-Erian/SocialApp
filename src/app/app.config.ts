@@ -20,6 +20,7 @@ import { LoadingInterceptor } from './core/interceptors/loading.interceptor';
 import { ErrorInterceptor } from './core/interceptors/errors.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 // import { QIsBrowser } from './shared/services/platform-check.service';
 
 export function QIsBrowser() {
@@ -46,5 +47,7 @@ export const appConfig: ApplicationConfig = {
         closeButton: true,
       }),
     ]),
+    provideAnimationsAsync(),
+    // { provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher },
   ],
 };
