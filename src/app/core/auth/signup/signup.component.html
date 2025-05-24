@@ -10,24 +10,31 @@
     <h4 class="text-center text-capitalize fw-bold">create a new account</h4>
     <p class="fw-light">it's quick and easy.</p>
     <hr class="w-100 my-0" />
-    <form [formGroup]="signUpForm" class="p-4 pt-3">
+    <form
+      [formGroup]="signUpForm"
+      (ngSubmit)="submitSignInForm()"
+      class="p-4 pt-3"
+    >
       <!-- Name Fields -->
       <div class="d-flex gap-2 mb-3">
         <input
           type="text"
           class="form-control shadow-none rounded-3"
           placeholder="First name"
-          formControlName="name"
+          [(ngModel)]="fName"
+          [ngModelOptions]="{ standalone: true }"
           required
         />
         <input
           type="text"
           class="form-control shadow-none rounded-3"
-          placeholder="Surname"
+          [(ngModel)]="lName"
+          [ngModelOptions]="{ standalone: true }"
+          placeholder="Last Name"
           required
         />
       </div>
-      <!-- formControlName="surnameCtrl" -->
+
       <!-- Date of Birth -->
       <label class="form-label small text-muted">Date of birth</label>
       <div class="date d-flex justify-content-between gap-2 mb-3">
@@ -36,6 +43,8 @@
           <select
             id="dob-day"
             class="form-select shadow-none rounded-3"
+            name="days"
+            (change)="setDay($event)"
             required
           >
             <option value="" disabled selected>Day</option>
@@ -51,11 +60,13 @@
           <select
             id="dob-month"
             class="form-select shadow-none rounded-3"
+            name="month"
+            (change)="setMonth($event)"
             required
           >
             <option value="" disabled selected>Month</option>
             @for (m of months; track $index) {
-            <option [value]="m">{{ m }}</option>
+            <option [value]="$index + 1">{{ m }}</option>
             }
           </select>
         </div>
@@ -64,6 +75,8 @@
           <select
             id="dob-year"
             class="form-select shadow-none rounded-3"
+            name="year"
+            (change)="setYear($event)"
             required
           >
             <option value="" disabled selected>Year</option>
@@ -86,7 +99,8 @@
             type="radio"
             name="gender"
             id="male"
-            value="male"
+            value="Male"
+            (change)="setGender($event)"
           />
         </label>
         <label
@@ -100,18 +114,32 @@
             name="gender"
             id="Female"
             value="Female"
+            (change)="setGender($event)"
           />
         </label>
       </div>
-      <!-- Contact & Password -->
+      <!-- Email -->
       <div class="mb-2">
+        @let emailControl = signUpForm.get('email')!;
         <input
           type="tel"
           class="form-control shadow-none rounded-3"
-          placeholder="Mobile number"
+          placeholder="codewithmena@gmail.com"
           required
+          formControlName="email"
         />
+        @if (emailControl.touched && emailControl.getError('required')) {
+        <div class="alert alert-danger mt-1 p-1" role="alert">
+          your Email is required
+        </div>
+        }@else if ( emailControl.getError('email')) {
+        <div class="alert alert-danger mt-1 p-1" role="alert">
+          your Email is not valid
+        </div>
+        }
       </div>
+      <!-- Contact & Password -->
+
       <div class="mb-2">
         <input
           type="password"
@@ -127,6 +155,7 @@
           class="form-control shadow-none rounded-3"
           placeholder="Re password"
           required
+          formControlName="rePassword"
         />
       </div>
       <!-- Terms Note -->
@@ -148,7 +177,7 @@
     </form>
     <span
       routerLink="/signin"
-      class="pointer text-primary d-inline-block mt-4 text-center mx-auto w-100"
+      class="pointer text-primary d-inline-block mt-1 text-center mx-auto w-100"
     >
       Already have an account?
     </span>

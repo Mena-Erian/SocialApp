@@ -1,3 +1,20 @@
 .create-account {
   margin-top: 15vh;
 }
+@media (min-width: 576px) {
+  section > div {
+    width: 90% !important;
+  }
+}
+
+@media (min-width: 768px) {
+  section > div {
+    width: 75% !important;
+  }
+}
+
+@media (min-width: 992px) {
+  section > div {
+    width: 60% !important;
+  }
+}
