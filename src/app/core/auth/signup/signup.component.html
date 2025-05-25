@@ -16,23 +16,50 @@
       class="p-4 pt-3"
     >
       <!-- Name Fields -->
-      <div class="d-flex gap-2 mb-3">
-        <input
-          type="text"
-          class="form-control shadow-none rounded-3"
-          placeholder="First name"
-          [(ngModel)]="fName"
-          [ngModelOptions]="{ standalone: true }"
-          required
-        />
-        <input
-          type="text"
-          class="form-control shadow-none rounded-3"
-          [(ngModel)]="lName"
-          [ngModelOptions]="{ standalone: true }"
-          placeholder="Last Name"
-          required
-        />
+      <div class="d-flex justify-content-between gap-2 mb-3">
+        <div class="w-100">
+          <input
+            type="text"
+            class="form-control shadow-none rounded-3"
+            placeholder="First name"
+            [(ngModel)]="fName"
+            [ngModelOptions]="{ standalone: true }"
+            required
+          />
+          @if (true ) {
+          <div class="alert alert-danger mt-1 p-1" role="alert">
+            your First Name is Not Valid
+          </div>
+          }
+        </div>
+        <div class="w-100">
+          <input
+            type="text"
+            class="form-control shadow-none rounded-3"
+            [(ngModel)]="lName"
+            [ngModelOptions]="{ standalone: true }"
+            placeholder="Last Name"
+            required
+            #lNameModel="ngModel"
+            minlength="3"
+            maxlength="12"
+            (change)="isNameValid(fName)"
+          />
+          @if (lNameModel.invalid && (lNameModel.touched||lNameModel.dirty)) {
+          @if (lNameModel.getError('required')) {
+          <div class="alert alert-danger mt-1 p-1" role="alert">
+            your Last Name is required
+          </div>
+          } @if (lNameModel.getError('minlength')) {
+          <div class="alert alert-danger mt-1 p-1" role="alert">
+            your Last Name is Not Valid , it should be min 3 charactors
+          </div>
+          } @if (lNameModel.getError('maxlength') && changeWork) {
+          <div class="alert alert-danger mt-1 p-1" role="alert">
+            your Last Name is Not Valid , it should be Max 12 charactors
+          </div>
+          } }
+        </div>
       </div>
 
       <!-- Date of Birth -->

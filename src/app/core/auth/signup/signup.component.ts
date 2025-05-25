@@ -1,3 +1,4 @@
+import { NgClass } from '@angular/common';
 import { AuthService } from './../services/auth.service';
 import { Component, inject, OnInit } from '@angular/core';
 import {
@@ -13,6 +14,12 @@ import {
   RxwebValidators,
 } from '@rxweb/reactive-form-validators'; // <-- #2 import module
 
+// interface NameValidations {
+//   required: boolean;
+//   minLength: boolean;
+//   touched: boolean;
+// }
+
 @Component({
   selector: 'app-signup',
   imports: [
@@ -20,6 +27,7 @@ import {
     FormsModule,
     ReactiveFormsModule,
     RxReactiveFormsModule,
+    NgClass,
   ],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.scss',
@@ -53,10 +61,16 @@ export class SignupComponent implements OnInit {
   day: string = '';
   month: string = '';
   year: string = '';
+  // NameValidations: NameValidations = {
+  //   required: false,
+  //   minLength: false,
+  //   touched: false,
+  // };
+  changeWork: boolean = false;
 
   ngOnInit(): void {
     this.initForm();
-    console.log(this.signUpForm.get('email'));
+    // console.log(this.signUpForm.get('email'));
   }
   initForm(): void {
     this.signUpForm = this.formBuilder.group(
@@ -69,8 +83,8 @@ export class SignupComponent implements OnInit {
             Validators.required,
             RxwebValidators.password({
               validation: {
-                maxLength: 10,
-                minLength: 5,
+                maxLength: 25,
+                minLength: 6,
                 digit: true,
                 upperCase: true,
               },
@@ -92,6 +106,22 @@ export class SignupComponent implements OnInit {
       ?.setValue(`${this.day}-${this.month}-${this.year}`);
     // }
     console.log(this.signUpForm.value);
+  }
+  isNameValid(uName: string): boolean {
+    // this.NameValidations.touched = true;
+    // function checkRequired(): boolean {
+    //   console.log(uName.length);
+    //   return uName.length > 1;
+    // }
+    // function checkMinLength(): boolean {
+    //   return uName.length > 2;
+    // }
+    // this.NameValidations.required = checkRequired();
+    // this.NameValidations.minLength = checkMinLength();
+    // console.log(this.NameValidations, uName);
+    // return this.NameValidations;
+    setTimeout(() => {}, 3000);
+    return false;
   }
   setDay(Event: Event): void {
     const el = Event.target as HTMLSelectElement;
