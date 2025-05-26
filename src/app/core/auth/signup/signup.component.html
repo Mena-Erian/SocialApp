@@ -12,7 +12,7 @@
     <hr class="w-100 my-0" />
     <form
       [formGroup]="signUpForm"
-      (ngSubmit)="submitSignInForm()"
+      (ngSubmit)="submitSignUpForm()"
       class="p-4 pt-3"
     >
       <!-- Name Fields -->
@@ -21,16 +21,35 @@
           <input
             type="text"
             class="form-control shadow-none rounded-3"
-            placeholder="First name"
             [(ngModel)]="fName"
             [ngModelOptions]="{ standalone: true }"
+            placeholder="First Name"
             required
+            [ngClass]="{
+              'is-valid': fNameModel.valid && fNameModel.touched,
+              'is-invalid': !fNameModel.valid && fNameModel.touched
+            }"
+            #fNameModel="ngModel"
+            minlength="3"
+            autofocus
+            maxlength="12"
           />
-          @if (true ) {
-          <div class="alert alert-danger mt-1 p-1" role="alert">
-            your First Name is Not Valid
+          @if (fNameModel.invalid && (fNameModel.touched||fNameModel.dirty)) {
+          @if (fNameModel.getError('required') &&
+          (fNameModel.touched||fNameModel.dirty)) {
+          <div class="alert alert-danger my-1 p-1" role="alert">
+            your First Name is required
           </div>
-          }
+          } @else if (fNameModel.getError('minlength')&&
+          (lNameModel.touched||lNameModel.dirty)) {
+          <div class="alert alert-danger my-1 p-1" role="alert">
+            your First Name is Not Valid , it Must be min 3 charactors
+          </div>
+          }@else if (fNameModel.getError('maxlength')) {
+          <div class="alert alert-danger my-1 p-1" role="alert">
+            Your first name is invalid, it must be 12 characters maximum
+          </div>
+          } }
         </div>
         <div class="w-100">
           <input
@@ -40,23 +59,28 @@
             [ngModelOptions]="{ standalone: true }"
             placeholder="Last Name"
             required
+            [ngClass]="{
+              'is-valid': lNameModel.valid && lNameModel.touched,
+              'is-invalid': !lNameModel.valid && lNameModel.touched
+            }"
             #lNameModel="ngModel"
             minlength="3"
             maxlength="12"
-            (change)="isNameValid(fName)"
           />
           @if (lNameModel.invalid && (lNameModel.touched||lNameModel.dirty)) {
-          @if (lNameModel.getError('required')) {
-          <div class="alert alert-danger mt-1 p-1" role="alert">
+          @if (lNameModel.getError('required') &&
+          (lNameModel.touched||lNameModel.dirty)) {
+          <div class="alert alert-danger my-1 p-1" role="alert">
             your Last Name is required
           </div>
-          } @if (lNameModel.getError('minlength')) {
-          <div class="alert alert-danger mt-1 p-1" role="alert">
-            your Last Name is Not Valid , it should be min 3 charactors
+          } @else if (lNameModel.getError('minlength')&&
+          (lNameModel.touched||lNameModel.dirty)) {
+          <div class="alert alert-danger my-1 p-1" role="alert">
+            your Last Name is Not Valid , it Must be min 3 charactors
           </div>
-          } @if (lNameModel.getError('maxlength') && changeWork) {
-          <div class="alert alert-danger mt-1 p-1" role="alert">
-            your Last Name is Not Valid , it should be Max 12 charactors
+          }@else if (fNameModel.getError('maxlength')) {
+          <div class="alert alert-danger my-1 p-1" role="alert">
+            Your Last name is invalid, it must be 12 characters maximum
           </div>
           } }
         </div>
@@ -126,7 +150,7 @@
             type="radio"
             name="gender"
             id="male"
-            value="Male"
+            value="male"
             (change)="setGender($event)"
           />
         </label>
@@ -140,7 +164,7 @@
             type="radio"
             name="gender"
             id="Female"
-            value="Female"
+            value="female"
             (change)="setGender($event)"
           />
         </label>
@@ -154,13 +178,21 @@
           placeholder="codewithmena@gmail.com"
           required
           formControlName="email"
+          [ngClass]="{
+            'is-valid':
+              !emailControl.errors &&
+              (emailControl.touched || emailControl.dirty),
+            'is-invalid':
+              emailControl.errors &&
+              (emailControl.touched || emailControl.dirty)
+          }"
         />
         @if (emailControl.touched && emailControl.getError('required')) {
-        <div class="alert alert-danger mt-1 p-1" role="alert">
+        <div class="alert alert-danger my-1 p-1" role="alert">
           your Email is required
         </div>
-        }@else if ( emailControl.getError('email')) {
-        <div class="alert alert-danger mt-1 p-1" role="alert">
+        }@else if ( emailControl.getError('email') ) {
+        <div class="alert alert-danger my-1 p-1" role="alert">
           your Email is not valid
         </div>
         }
@@ -168,22 +200,60 @@
       <!-- Contact & Password -->
 
       <div class="mb-2">
+        @let passwordCtrl = signUpForm.get('password')!;
         <input
           type="password"
           class="form-control shadow-none rounded-3"
           placeholder="New password"
           formControlName="password"
           required
+          [ngClass]="{
+            'is-valid':
+              !passwordCtrl.errors &&
+              (passwordCtrl.touched || passwordCtrl.dirty),
+            'is-invalid':
+              passwordCtrl.errors &&
+              (passwordCtrl.touched || passwordCtrl.dirty)
+          }"
         />
+        @if (passwordCtrl.touched && passwordCtrl.getError('required')) {
+        <div class="alert alert-danger my-1 p-1" role="alert">
+          your Password is required
+        </div>
+        }@else if ( passwordCtrl.getError('password')) {
+        <div class="alert alert-danger my-1 p-1" role="alert">
+          @if (passwordCtrl.errors ) {
+          {{ passwordCtrl.getError("password").message }} }
+        </div>
+        }
       </div>
       <div class="mb-2">
+        @let rePasswordCtrl = signUpForm.get('rePassword')!;
         <input
           type="password"
           class="form-control shadow-none rounded-3"
           placeholder="Re password"
           required
           formControlName="rePassword"
+          [ngClass]="{
+            'is-valid':
+              !rePasswordCtrl.errors &&
+              (rePasswordCtrl.touched || rePasswordCtrl.dirty),
+            'is-invalid':
+              rePasswordCtrl.errors &&
+              (rePasswordCtrl.touched || rePasswordCtrl.dirty)
+          }"
         />
+        @if (rePasswordCtrl.touched && rePasswordCtrl.getError('required')) {
+        <div class="alert alert-danger my-1 p-1" role="alert">
+          your Password is required
+        </div>
+        }@else if ( rePasswordCtrl.getError('compare') &&
+        rePasswordCtrl.touched) {
+        <div class="alert alert-danger my-1 p-1" role="alert">
+          {{ rePasswordCtrl.getError("compare").message }}
+        </div>
+        }
       </div>
       <!-- Terms Note -->
       <p class="small text-muted mb-3">
@@ -197,6 +267,18 @@
         <a class="link-primary pointer">Cookies Policy</a>. You may receive SMS
         notifications from us and can opt out at any time.
       </p>
+      @if ( isCreated ) {
+      <div class="alert alert-success mt-1 p-1 w-100 text-center" role="alert">
+        <strong>Success!</strong> Your account has been created successfully.
+      </div>
+      }@if (!isCreated && msgError ) {
+      <div
+        class="alert alert-danger mt-1 p-1 w-100 text-center text-uppercase"
+        role="alert"
+      >
+        <strong>error!</strong> {{ msgError }}
+      </div>
+      }
 
       <button class="btn btn-primary w-100 rounded-pill" type="submit">
         Sign Up
@@ -210,31 +292,3 @@
     </span>
   </div>
 </section>
-
-<!--
-
-
--->
-
-<!-- backup -->
-
-<!-- <form class="w-100">
-  <div class="d-flex justify-content-center align-items-center gap-3">
-    <input
-      class="form-control shadow-none mb-3 rounded-3"
-      placeholder="First name"
-      type="text"
-    />
-    <input
-      class="form-control shadow-none mb-3 rounded-3"
-      placeholder="Surname"
-      type="text"
-    />
-  </div>
-  <div class="d-flex justify-content-between align-items-center">
-    --here was comment <input class="form-control" type="date" />
-  </div>
-  <button class="btn btn-primary w-100 rounded-pill" type="submit">
-    Sign Up
-  </button>
-</form> -->
